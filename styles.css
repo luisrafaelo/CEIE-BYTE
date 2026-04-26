@@ -9,6 +9,20 @@
     --oscuro: #222;
     --claro: #f5f7fa;
 }
+html {
+  scroll-padding-top: 80px; /* Evita que el header tape las secciones */
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Base para móvil */
+  }
+  
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
 body {
     font-family: 'Rajdhani', sans-serif;
     scroll-behavior: smooth;
@@ -306,4 +320,199 @@ footer {
 
 #material a:hover {
     color: var(--naranja);
+}
+/* ========== RESPONSIVE PARA CELULAR ========== */
+
+/* Tablets y celulares grandes (hasta 1024px) */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 32px;
+    letter-spacing: 4px;
+  }
+  
+  .byte-vertical span {
+    font-size: 70px; /* Reduce BYTE en tablets */
+  }
+}
+
+/* Celulares (hasta 768px) */
+@media (max-width: 768px) {
+  /* HEADER - se vuelve columna */
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 20px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+  }
+  
+  .logo {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  nav a {
+    margin-left: 0;
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+  
+  /* HERO section */
+  .hero {
+    padding-top: 100px; /* Espacio para header fijo */
+  }
+  
+  .hero-layout {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .byte-vertical {
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 2px solid rgba(81,40,153,0.5);
+    padding-right: 0;
+    padding-bottom: 10px;
+    gap: 8px;
+  }
+  
+  .byte-vertical span {
+    font-size: 55px; /* BYTE más chico en celular pero visible */
+    line-height: 1;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+  
+  .hero-sub {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  
+  /* SECTIONS */
+  .section {
+    padding: 60px 20px;
+  }
+  
+  .section h2 {
+    font-size: 28px;
+  }
+  
+  /* CARDS */
+  .cards {
+    gap: 20px;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+  }
+  
+  .card h3 {
+    font-size: 18px;
+  }
+  
+  .card p {
+    font-size: 14px;
+  }
+  
+  /* PERRY PEEK - más chico o escondido en celular */
+  .perry-peek {
+    width: 300px;
+    bottom: -80px;
+    right: -20px;
+    opacity: 0.7;
+  }
+  
+  @keyframes perryPeek {
+    from { bottom: -1000px; }
+    to   { bottom: -80px; }
+  }
+  
+  /* FOOTER */
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
+/* Celulares muy pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .byte-vertical span {
+    font-size: 40px;
+  }
+  
+  .hero h1 {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  
+  .section h2 {
+    font-size: 24px;
+  }
+  
+  .card {
+    width: 100%;
+  }
+  
+  nav a {
+    font-size: 12px;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .logo img {
+    width: 28px;
+    height: 28px;
+  }
+  
+  /* Esconder Perry en celulares muy pequeños (opcional) */
+  .perry-peek {
+    display: none;
+  }
+}
+
+/* Ajuste para landscape (celular horizontal) */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 120px 20px 60px;
+  }
+  
+  .hero-layout {
+    flex-direction: row;
+  }
+  
+  .byte-vertical {
+    flex-direction: column;
+    border-right: 2px solid rgba(81,40,153,0.5);
+    border-bottom: none;
+  }
+  
+  .byte-vertical span {
+    font-size: 50px;
+  }
 }
