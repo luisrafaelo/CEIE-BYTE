@@ -495,24 +495,211 @@ footer {
   }
 }
 
-/* Ajuste para landscape (celular horizontal) */
-@media (max-width: 900px) and (orientation: landscape) {
+/* ========== RESPONSIVE COMPLETO ========== */
+
+/* MÓVILES (hasta 768px) */
+@media only screen and (max-width: 768px) {
+  
+  /* Header responsive */
+  header {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 12px 15px !important;
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+  }
+  
+  .logo {
+    font-size: 20px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .logo img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  
+  nav a {
+    font-size: 12px !important;
+    margin-left: 0 !important;
+    padding: 4px 8px !important;
+  }
+  
+  /* Hero section */
   .hero {
-    min-height: auto;
-    padding: 120px 20px 60px;
+    padding-top: 140px !important;
+    min-height: auto !important;
+    padding-bottom: 40px !important;
   }
   
   .hero-layout {
-    flex-direction: row;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 0 15px !important;
   }
   
   .byte-vertical {
-    flex-direction: column;
-    border-right: 2px solid rgba(81,40,153,0.5);
-    border-bottom: none;
+    flex-direction: row !important;
+    border-right: none !important;
+    border-bottom: 2px solid rgba(81,40,153,0.4) !important;
+    padding-right: 0 !important;
+    padding-bottom: 8px !important;
+    gap: 5px !important;
   }
   
   .byte-vertical span {
-    font-size: 50px;
+    font-size: 45px !important;
+    line-height: 1 !important;
+  }
+  
+  .hero-content {
+    text-align: center !important;
+  }
+  
+  .hero h1 {
+    font-size: 22px !important;
+    letter-spacing: 3px !important;
+  }
+  
+  .hero-sub {
+    font-size: 8px !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Secciones */
+  .section {
+    padding: 50px 20px !important;
+  }
+  
+  .section h2 {
+    font-size: 24px !important;
+  }
+  
+  .section p {
+    font-size: 14px !important;
+    padding: 0 10px !important;
+  }
+  
+  /* Cards */
+  .cards {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+  
+  .card {
+    width: 90% !important;
+    max-width: 320px !important;
+    padding: 20px !important;
+  }
+  
+  /* Perry */
+  .perry-peek {
+    width: 200px !important;
+    bottom: -60px !important;
+    right: -15px !important;
+    opacity: 0.6 !important;
+  }
+  
+  /* Footer */
+  footer {
+    font-size: 11px !important;
+    padding: 15px !important;
+  }
+  
+  /* Scroll padding */
+  html {
+    scroll-padding-top: 130px !important;
+  }
+}
+
+/* MÓVILES PEQUEÑOS (hasta 480px) */
+@media only screen and (max-width: 480px) {
+  .byte-vertical span {
+    font-size: 35px !important;
+  }
+  
+  .hero h1 {
+    font-size: 18px !important;
+    letter-spacing: 2px !important;
+  }
+  
+  .section h2 {
+    font-size: 20px !important;
+  }
+  
+  nav a {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+  }
+  
+  .logo {
+    font-size: 18px !important;
+  }
+  
+  /* Opcional: ocultar Perry en móviles muy pequeños */
+  .perry-peek {
+    display: none !important;
+  }
+}
+
+/* TABLETS (769px - 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .byte-vertical span {
+    font-size: 75px !important;
+  }
+  
+  .hero h1 {
+    font-size: 32px !important;
+  }
+  
+  .cards {
+    gap: 20px !important;
+  }
+  
+  .card {
+    width: 220px !important;
+  }
+}
+
+/* MODO HORIZONTAL en móvil */
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    padding-top: 100px !important;
+  }
+  
+  .hero-layout {
+    flex-direction: row !important;
+  }
+  
+  .byte-vertical {
+    flex-direction: column !important;
+    border-right: 2px solid rgba(81,40,153,0.4) !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    padding-right: 15px !important;
+  }
+  
+  .byte-vertical span {
+    font-size: 40px !important;
+  }
+  
+  .hero h1 {
+    font-size: 20px !important;
+  }
+  
+  nav a {
+    font-size: 11px !important;
   }
 }
