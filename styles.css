@@ -137,3 +137,12 @@ footer {
     padding: 20px;
     text-align: center;
 }
+#Material a {
+    color: var(--turquesa);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#Material a:hover {
+    color: var(--naranja);
+}
