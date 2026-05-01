@@ -90,21 +90,59 @@
 </section>
 
 <section id="proyectos" class="section proyectos">
-  <h2>PROYECTOS</h2>
- 
-  <div class="proyectos-grid">
 
-    <div class="proyecto-card active">
-      <h3>Aniversario de la Carrera de Electrónica</h3>
-      <span class="status status-active">EN EJECUCIÓN</span>
-      <p>
-        Evento integral que articula seminarios técnicos, campeonatos deportivos
-        y actividades culturales fortaleciendo identidad académica.
-      </p>
-      <div class="progress">
-        <div class="progress-bar" style="width: 65%;"></div>
+  <div class="proyectos-container">
+
+    <!-- IZQUIERDA -->
+    <div class="proyectos-main">
+
+      <!-- Proyecto fijo -->
+      <div class="proyecto-card fijo">
+        <h3>Aniversario de la Carrera 🎉</h3>
+        <p>
+          Evento central de la gestión. Incluye seminarios técnicos,
+          actividades deportivas, integración estudiantil y feria tecnológica.
+        </p>
       </div>
-      <button>Ver detalles</button>
+
+      <!-- Proyecto dinámico -->
+      <div class="proyecto-card dinamico" id="proyecto-dinamico">
+        <h3>Seminarios Técnicos 🎓</h3>
+        <p>
+          Ciclo de conferencias con docentes y profesionales invitados
+          enfocados en innovación electrónica y tecnología aplicada.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- DERECHA -->
+    <div class="proyectos-scroll">
+
+      <div class="mini-card active"
+           data-title="Seminarios Técnicos 🎓"
+           data-text="Ciclo de conferencias con docentes y profesionales invitados enfocados en innovación electrónica y tecnología aplicada.">
+           Seminarios
+      </div>
+
+      <div class="mini-card"
+           data-title="Torneos Deportivos ⚽"
+           data-text="Competencias internas e interfacultativas para fortalecer integración y bienestar estudiantil.">
+           Deportes
+      </div>
+
+      <div class="mini-card"
+           data-title="Feria Tecnológica ⚙"
+           data-text="Exposición de proyectos electrónicos, automatización y desarrollo tecnológico estudiantil.">
+           Tecnología
+      </div>
+
+      <div class="mini-card"
+           data-title="Cultura e Integración 🎭"
+           data-text="Actividades culturales, concursos y espacios de integración universitaria.">
+           Cultura
+      </div>
+
     </div>
 
   </div>
