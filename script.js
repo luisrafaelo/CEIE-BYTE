@@ -84,3 +84,43 @@ function onScroll() {
   lastY   = scrollY;
   ticking = false;
 }
+// Comunicados — buscador + filtros
+let filtroActivo = "todos";
+
+function setFiltro(f) {
+  filtroActivo = f;
+  document.querySelectorAll(".filtro-btn").forEach(b => {
+    b.classList.toggle("on", b.dataset.f === f);
+  });
+  filtrar();
+}
+
+function filtrar() {
+  const q = document.getElementById("buscador").value.toLowerCase();
+  const cards = document.querySelectorAll(".com-card");
+  let visibles = 0;
+
+  cards.forEach(card => {
+    const tag     = card.dataset.tag;
+    const texto   = card.textContent.toLowerCase();
+    const tagOk   = filtroActivo === "todos" || tag === filtroActivo;
+    const textoOk = texto.includes(q);
+    const mostrar = tagOk && textoOk;
+
+    card.style.display = mostrar ? "" : "none";
+    if (mostrar) visibles++;
+  });
+
+  const total = cards.length;
+  document.getElementById("contador").textContent =
+    `Mostrando ${visibles} de ${total} comunicados`;
+  document.getElementById("empty").style.display =
+    visibles === 0 ? "block" : "none";
+}
+
+// Inicializar contador
+document.addEventListener("DOMContentLoaded", filtrar);
+
+// Buscador
+document.getElementById("buscador")
+  ?.addEventListener("input", filtrar);

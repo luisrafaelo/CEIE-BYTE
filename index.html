@@ -102,7 +102,7 @@
         <p>Evento central de la gestión. Incluye seminarios técnicos,
         actividades deportivas, integración estudiantil y feria tecnológica.</p>
         <div class="progress">
-          <div class="progress-bar" style="width: 10%;"></div>
+        <div class="progress-bar" style="width: 10%;"></div>
         </div>
         <button>Ver más</button>
       </div>
@@ -114,7 +114,7 @@
         <p>Ciclo de conferencias con docentes y profesionales invitados
         enfocados en innovación electrónica y tecnología aplicada.</p>
         <div class="progress">
-          <div class="progress-bar" style="width: 50%;"></div>
+        <div class="progress-bar" style="width: 50%;"></div>
         </div>
         <button>Ver más</button>
       </div>
@@ -155,9 +155,49 @@
 
   </div>
 </section>
-<section id="comunicados" class="section dark">
-    <h2>Últimos Comunicados</h2>
-    <p>Próxima asamblea general: 12 de mayo.</p>
+
+<section id="comunicados" class="section comunicados">
+  <h2>Comunicados</h2>
+  <p class="sec-sub">Información oficial · CEIE-BYTE</p>
+
+  <!-- Buscador -->
+  <div class="buscador-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="buscador" id="buscador" placeholder="Buscar comunicado...">
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <button class="filtro-btn on" data-f="todos">Todos</button>
+    <button class="filtro-btn" data-f="academico">Académico</button>
+    <button class="filtro-btn" data-f="administrativo">Administrativo</button>
+    <button class="filtro-btn" data-f="eventos">Eventos</button>
+    <button class="filtro-btn" data-f="convocatorias">Convocatorias</button>
+  </div>
+
+  <div class="contador" id="contador"></div>
+  <div class="cards-lista" id="lista">
+
+    <!-- Card fijada (siempre arriba) -->
+    <div class="com-card fijada" data-tag="eventos">
+      <div class="card-top">
+        <span class="pin-icon">📌</span>
+        <span class="tag-badge tag-eventos">Eventos</span>
+        <span class="badge-nuevo">Nuevo</span>
+        <span class="card-fecha">28 abr 2026</span>
+      </div>
+      <div class="card-title">Aniversario — Programa Oficial</div>
+      <div class="card-preview">Cronograma completo...</div>
+      <div class="card-footer">
+        <a class="pdf-btn" href="docs/aniversario.pdf" download>📄 Descargar PDF</a>
+        <span class="ver-mas">Ver más →</span>
+      </div>
+    </div>
+
+    <!-- Más cards con data-tag="academico|administrativo|eventos|convocatorias" -->
+
+  </div>
+  <div class="empty" id="empty">No se encontraron comunicados 🔍</div>
 </section>
 
 <section id="contacto" class="section">
