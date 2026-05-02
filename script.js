@@ -2,7 +2,8 @@ const header   = document.querySelector("header");
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 const perry    = document.getElementById("perry");
-
+const hamBtn  = document.getElementById('hamBtn');
+const mainNav = document.getElementById('mainNav');
 // --- Proyectos dinámicos ---
 const miniCards = document.querySelectorAll(".mini-card");
 const dinamico  = document.getElementById("proyecto-dinamico");
@@ -161,3 +162,15 @@ function enviar() {
   document.getElementById("formArea").style.display    = "none";
   document.getElementById("formSuccess").style.display = "block";
 }
+
+hamBtn.addEventListener('click', () => {
+  mainNav.classList.toggle('open');
+  hamBtn.textContent = mainNav.classList.contains('open') ? '✕' : '☰';
+});
+
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    hamBtn.textContent = '☰';
+  });
+});
