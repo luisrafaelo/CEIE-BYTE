@@ -101,26 +101,63 @@ function filtrar() {
   let visibles = 0;
 
   cards.forEach(card => {
-    const tag     = card.dataset.tag;
-    const texto   = card.textContent.toLowerCase();
-    const tagOk   = filtroActivo === "todos" || tag === filtroActivo;
-    const textoOk = texto.includes(q);
+    const tagOk   = filtroActivo === "todos" || card.dataset.tag === filtroActivo;
+    const textoOk = card.textContent.toLowerCase().includes(q);
     const mostrar = tagOk && textoOk;
-
     card.style.display = mostrar ? "" : "none";
     if (mostrar) visibles++;
   });
+  
+  const contador = document.getElementById("contador");
+  if (contador) contador.textContent = `Mostrando ${visibles} de ${cards.length} comunicados`;
 
-  const total = cards.length;
-  document.getElementById("contador").textContent =
-    `Mostrando ${visibles} de ${total} comunicados`;
-  document.getElementById("empty").style.display =
-    visibles === 0 ? "block" : "none";
+  const empty = document.getElementById("empty");
+  if (empty) empty.style.display = visibles === 0 ? "block" : "none";
 }
 
-// Inicializar contador
-document.addEventListener("DOMContentLoaded", filtrar);
+// Conectar botones de filtro
+document.querySelectorAll(".filtro-btn").forEach(btn => {
+  btn.addEventListener("click", () => setFiltro(btn.dataset.f));
+});
 
-// Buscador
-document.getElementById("buscador")
-  ?.addEventListener("input", filtrar);
+// Conectar buscador
+document.getElementById("buscador")?.addEventListener("input", filtrar);
+
+// Inicializar al cargar
+document.addEventListener("DOMContentLoaded", filtrar);
+// Estado disponible según horario (L-V 8:00-18:00)
+function actualizarEstado() {
+  const ahora  = new Date();
+  const dia    = ahora.getDay();    // 0=Dom, 6=Sab
+  const hora   = ahora.getHours();
+  const dot    = document.getElementById("estadoDot");
+  const txt    = document.getElementById("estadoTxt");
+  if (!dot || !txt) return;
+  const disponible = dia >= 1 && dia <= 5 && hora >= 8 && hora < 18;
+  dot.style.background = disponible ? "#25d366" : "#ff4444";
+  txt.textContent = disponible
+    ? "Disponibles ahora · Respondemos en minutos"
+    : "Fuera de horario · Te respondemos mañana";
+}
+actualizarEstado();
+
+// Formulario — envía por WhatsApp con el mensaje
+function enviar() {
+  const nombre  = document.getElementById("fNombre")?.value.trim();
+  const email   = document.getElementById("fEmail")?.value.trim();
+  const mensaje = document.getElementById("fMensaje")?.value.trim();
+
+  if (!nombre || !mensaje) {
+    alert("Por favor completa tu nombre y mensaje.");
+    return;
+  }
+
+  // Opción A: redirige a WhatsApp con el mensaje prellenado
+  const texto = `Hola CEIE-BYTE! Soy ${nombre} (${email}). ${mensaje}`;
+  const url   = `https://wa.me/+59179521088?text=${encodeURIComponent(texto)}`;
+  window.open(url, "_blank");
+
+  // Muestra mensaje de éxito
+  document.getElementById("formArea").style.display    = "none";
+  document.getElementById("formSuccess").style.display = "block";
+}

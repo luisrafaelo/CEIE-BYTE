@@ -743,12 +743,123 @@ nav a.active::after {
   color: rgba(255,255,255,0.25);
   font-size: 14px;
 }
-/* ========== 11. SECCIÓN OSCURA (COMUNICADOS) ---- */
-.dark {
-    background: #0a66c2;
-    color: white;
+/* ── CONTACTO ── */
+.contacto {
+  background: linear-gradient(135deg,#00001e 0%,#091630 35%,#1e2845 70%,#333c5a 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
-
+.contacto h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.contacto .sec-sub {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  margin-bottom: 24px;
+}
+.estado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.estado-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #25d366;
+  animation: pulseEstado 2s ease-in-out infinite;
+}
+@keyframes pulseEstado {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%     { opacity:.6; transform:scale(1.3); }
+}
+.estado-txt { font-size: 12px; color: rgba(255,255,255,0.4); }
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.red-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 20px; border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.55);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.red-btn:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-3px);
+}
+.red-btn.whatsapp:hover  { border-color:#25d366; color:#25d366; box-shadow:0 0 14px rgba(37,211,102,0.25); }
+.red-btn.tiktok:hover { border-color:#e1306c; color:#e1306c; box-shadow:0 0 14px rgba(225,48,108,0.25); }
+.red-btn.facebook:hover  { border-color:#1877f2; color:#1877f2; box-shadow:0 0 14px rgba(24,119,242,0.25); }
+.red-btn.email:hover     { border-color:var(--turquesa); color:var(--turquesa); box-shadow:0 0 14px rgba(0,191,166,0.25); }
+.divider { width:40px; height:1px; background:rgba(255,255,255,0.1); margin:0 auto 32px; }
+.form-wrap  { max-width: 480px; margin: 0 auto; }
+.form-row   { display:flex; gap:12px; margin-bottom:12px; }
+.form-group { display:flex; flex-direction:column; gap:6px; flex:1; }
+.form-label { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+.form-input,
+.form-textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+.form-input:focus,
+.form-textarea:focus { border-color:var(--turquesa); box-shadow:0 0 12px rgba(0,191,166,0.15); }
+.form-textarea { resize:vertical; min-height:110px; }
+.form-footer { display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px; }
+.form-note  { font-size:11px; color:rgba(255,255,255,0.25); }
+.submit-btn {
+  padding:11px 28px; border-radius:30px;
+  background:linear-gradient(135deg, var(--turquesa), #00a08a);
+  border:none; color:#fff;
+  font-family:'Rajdhani',sans-serif;
+  font-size:15px; font-weight:700;
+  cursor:pointer; transition:all 0.3s;
+}
+.submit-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,191,166,0.3); }
+.form-success {
+  display:none; text-align:center; padding:28px;
+  background:rgba(0,191,166,0.08);
+  border-radius:14px;
+  border:1px solid rgba(0,191,166,0.2);
+}
+.form-success .check { font-size:32px; margin-bottom:8px; }
+.form-success p { color:rgba(255,255,255,0.7); }
+.form-intro {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
 /* ========== 12. FOOTER Y ENLACES ---- */
 footer {
     background: #111;
@@ -1080,4 +1191,8 @@ footer {
   .cards-lista { max-width: 100%; }
   .card-title  { font-size: 14px; }
   .card-fecha  { display: none; } /* se oculta en móvil para ahorrar espacio */
+}
+@media (max-width: 768px) {
+  .form-row { flex-direction:column; }
+  .redes    { flex-direction:column; align-items:center; }
 }
