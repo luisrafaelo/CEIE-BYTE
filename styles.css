@@ -10,7 +10,16 @@
     --oscuro: #222;
     --claro: #f5f7fa;
 }
-
+  /* Botón hamburguesa */
+.ham-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px;
+}
 /* ========== 1. CONFIGURACIÓN BASE (HTML, BODY) ---- */
 html {
   scroll-snap-type: y mandatory;
@@ -278,7 +287,7 @@ nav a.active::after {
   margin-top: 2px;
 }
 
-/* ========== 9. SECCIONES GENERALES (NOSOTROS, PROYECTOS, ETC) ---- */
+/** ========== 9. SECCIONES GENERALES (NOSOTROS, PROYECTOS, ETC) ---- */
 .section {
   scroll-snap-align: start;
   min-height: 100vh;
@@ -292,98 +301,107 @@ nav a.active::after {
 /* ============================= */
 
 .nosotros-section {
-    background: linear-gradient(135deg, #4835b0, #9777fd);
-    padding-top: 55px;  /* ajusta este valor */
+  background: linear-gradient(135deg, #0f0728 0%, #1a0a3d 40%, #0d1a3a 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding-top: 55px;
 }
-
-
+.nosotros-section::before {
+  content: "";
+  position: absolute; width: 200%; height: 200%;
+  background-image:
+    linear-gradient(rgba(138,57,176,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,191,166,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: rotate(25deg);
+  top: -50%; left: -50%;
+  pointer-events: none;
+}
+/* Orbs de luz */
+.nosotros-section::after {
+  content: "";
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(138,57,176,0.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  pointer-events: none;
+  border-radius: 50%;
+}
 .nosotros-intro {
-    color: #F5E17A;
-    max-width: 750px;
-    margin: 8px auto 50px;
-    font-size: 21px;
-    line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 40px;
+  font-size: 16px; line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  position: relative; z-index: 1;
 }
-
+.nosotros-intro strong { color: #00ffff; }
 .mv-container {
-    display: flex;
-    gap: 40px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 80px;
+  display: flex; gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  position: relative; z-index: 1;
 }
 
 .mv-card {
-    background: rgb(191, 245, 233);
-    padding: 35px;
-    width: 350px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px; padding: 28px 24px;
+  width: 300px; position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
-
 .mv-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 5px;
-    width: 100%;
-    background: linear-gradient(90deg, var(--turquesa), var(--naranja));
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
 }
-
-.mv-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-}
-
+.mv-card:nth-child(1)::before { background: linear-gradient(90deg, var(--turquesa), #00a8ff); }
+.mv-card:nth-child(2)::before { background: linear-gradient(90deg, var(--naranja), #ff0080); }
+.mv-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.15); }
+.mv-card:nth-child(1):hover { box-shadow: 0 12px 40px rgba(0,191,166,0.15); }
+.mv-card:nth-child(2):hover { box-shadow: 0 12px 40px rgba(255,111,0,0.15); }
 .mv-card h3 {
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: var(--naranja);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 2px;
+  margin-bottom: 12px;
 }
-
-/* Valores */
-
+.mv-card:nth-child(1) h3 { color: var(--turquesa); }
+.mv-card:nth-child(2) h3 { color: var(--naranja); }
+.mv-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
 .valores-title {
-    margin-bottom: 25px;
-    font-size: 24px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  text-align: center; margin-bottom: 20px;
+  position: relative; z-index: 1;
 }
-
 .valores-grid {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 10px;
+  position: relative; z-index: 1;
 }
-
 .valor-item {
-    position: relative;
-    z-index: 6;
-    background: var(--turquesa);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: 0.3s;
+  padding: 8px 20px; border-radius: 30px;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px;
+  border: 1px solid rgba(0,191,166,0.3);
+  color: var(--turquesa);
+  background: rgba(0,191,166,0.07);
+  transition: all 0.3s ease;
 }
-
 .valor-item:hover {
-    background: var(--naranja);
-    transform: scale(1.08);
+  background: rgba(0,191,166,0.15);
+  border-color: var(--turquesa);
+  box-shadow: 0 0 16px rgba(0,191,166,0.3);
+  transform: translateY(-3px);
+  color: #00ffff;
 }
-.section h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-/* =========================
-   SECCIÓN PROYECTOS OSCURA
-========================= */
 
+/* =========================
+   SECCIÓN PROYECTOS 
+========================= */
 .proyectos {
     position: relative;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -963,6 +981,7 @@ footer {
 
 /* ── Tablet grande (769px - 1024px) ── */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .ham-btn { display: block !important;}
   .byte-vertical span { font-size: 75px; }
   .hero h1            { font-size: 32px; letter-spacing: 4px; }
   .card               { width: 220px; }
@@ -970,7 +989,7 @@ footer {
 
 /* ── Móvil (hasta 768px) ── */
 @media (max-width: 768px) {
-
+  .ham-btn { display: block !important;}
   /* Header — hamburguesa */
   header {
     top: 10px; left: 10px; right: 10px;
@@ -1009,14 +1028,6 @@ footer {
   nav a:last-child { border-bottom: none; }
   nav a:hover { transform: none; }
   nav a::after { display: none; }
-
-  /* Botón hamburguesa */
-  .ham-btn {
-    display: block;
-    background: none; border: none;
-    color: white; font-size: 22px;
-    cursor: pointer; padding: 4px;
-  }
 
   /* Hero */
   .hero { padding-top: 90px; min-height: 100vh; }
@@ -1080,6 +1091,7 @@ footer {
 
 /* ── Móvil pequeño (hasta 480px) ── */
 @media (max-width: 480px) {
+  .ham-btn { display: block !important;}
   .byte-vertical span { font-size: 38px; }
   .hero h1            { font-size: 18px; letter-spacing: 2px; }
   .section h2         { font-size: 22px; }
@@ -1099,6 +1111,7 @@ footer {
     border-bottom: none;
     padding-bottom: 0; padding-right: 15px;
   }
+  .ham-btn { display: block !important;}
   .byte-vertical span { font-size: 36px; }
   .hero h1            { font-size: 18px; }
 }
