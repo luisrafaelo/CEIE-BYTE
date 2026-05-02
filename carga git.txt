@@ -1,3 +1,8 @@
 git add .
 git commit -m "Agregada sección Material con enlace"
 git push
+
+para los pdf:MATERIA_TEMA_AÑO.pdf
+EJ: ELECTRONICA-I_GUIA-LAB-3_2026.pdf
+    DOCUMENTOS_ACTA-REUNION_2026-04.pdf
+    FORMULARIOS_SOLICITUD-LABORATORIO_v2.pdf
