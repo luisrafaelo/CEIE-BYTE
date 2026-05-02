@@ -90,77 +90,71 @@
 </section>
 
 <section id="proyectos" class="section proyectos">
-
   <div class="proyectos-container">
 
-    <!-- IZQUIERDA -->
-    <div class="proyectos-main">
+    <!-- Cards lado a lado -->
+    <div class="proyectos-cards">
 
-      <!-- Proyecto fijo -->
+      <!-- Card fija -->
       <div class="proyecto-card fijo">
-        <h3>Aniversario de la Carrera 🎉</h3>
+        <h3>Aniversario de la Carrera</h3>
         <span class="status status-active">En ejecución</span>
-        <p>
-          Evento central de la gestión. Incluye seminarios técnicos,
-          actividades deportivas, integración estudiantil y feria tecnológica.
-        </p>
-          <!-- Barra -->
-    <div class="progress">
-      <div class="progress-bar" style="width: 85%;"></div>
+        <p>Evento central de la gestión. Incluye seminarios técnicos,
+        actividades deportivas, integración estudiantil y feria tecnológica.</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: 10%;"></div>
+        </div>
+        <button>Ver más</button>
       </div>
-  <button>Ver más</button>
-  </div>
 
-      <!-- Proyecto dinámico -->
+      <!-- Card dinámica -->
       <div class="proyecto-card dinamico" id="proyecto-dinamico">
-        <h3>Seminarios Técnicos 🎓</h3>
+        <h3>Seminarios Técnicos</h3>
         <span class="status status-active">En ejecución</span>
-        <p>
-          Ciclo de conferencias con docentes y profesionales invitados
-          enfocados en innovación electrónica y tecnología aplicada.
-        </p>
-            <!-- Barra -->
-    <div class="progress">
-      <div class="progress-bar" style="width: 70%;"></div>
-    </div>
-
-    <button>Ver más</button>
+        <p>Ciclo de conferencias con docentes y profesionales invitados
+        enfocados en innovación electrónica y tecnología aplicada.</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: 50%;"></div>
+        </div>
+        <button>Ver más</button>
       </div>
 
     </div>
 
-    <!-- DERECHA -->
-    <div class="proyectos-scroll">
-
-      <div class="mini-card active"
-           data-title="Seminarios Técnicos 🎓"
-           data-text="Ciclo de conferencias con docentes y profesionales invitados enfocados en innovación electrónica y tecnología aplicada.">
-           Seminarios
-      </div>
-
+    <!-- Mini-cards ABAJO — solo este bloque, borra el otro -->
+    <div class="proyectos-tabs">
+    <div class="mini-card active"
+        data-title="Seminarios Técnicos"
+        data-text="Ciclo de conferencias con docentes y profesionales invitados enfocados en innovación electrónica y tecnología aplicada."
+        data-status="active"
+        data-progress="20">
+      Seminarios
+    </div>
       <div class="mini-card"
-           data-title="Torneos Deportivos ⚽"
-           data-text="Competencias internas e interfacultativas para fortalecer integración y bienestar estudiantil.">
-           Deportes
-      </div>
-
-      <div class="mini-card"
-           data-title="Feria Tecnológica ⚙"
-           data-text="Exposición de proyectos electrónicos, automatización y desarrollo tecnológico estudiantil.">
-           Tecnología
-      </div>
-
-      <div class="mini-card"
-           data-title="Cultura e Integración 🎭"
-           data-text="Actividades culturales, concursos y espacios de integración universitaria.">
-           Cultura
-      </div>
-
+      data-title="Torneos Deportivos"
+      data-text="Competencias internas e interfacultativas para fortalecer integración y bienestar estudiantil."
+      data-status="active"
+      data-progress="40">
+      Deportes
+    </div>
+    <div class="mini-card"
+        data-title="Feria Tecnológica"
+        data-text="Exposición de proyectos electrónicos, automatización y desarrollo tecnológico estudiantil."
+        data-status="soon"
+        data-progress="0">
+      Tecnología
+    </div>
+    <div class="mini-card"
+        data-title="Cultura e Integración"
+        data-text="Actividades culturales, concursos y espacios de integración universitaria."
+        data-status="soon"
+        data-progress="0">
+      Cultura
+    </div>
     </div>
 
   </div>
 </section>
-
 <section id="comunicados" class="section dark">
     <h2>Últimos Comunicados</h2>
     <p>Próxima asamblea general: 12 de mayo.</p>

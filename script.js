@@ -9,24 +9,37 @@ const dinamico  = document.getElementById("proyecto-dinamico");
 
 miniCards.forEach(card => {
   card.addEventListener("click", () => {
+    if (card.classList.contains("active")) return;
 
     miniCards.forEach(c => c.classList.remove("active"));
     card.classList.add("active");
 
     if (!dinamico) return;
 
-    // Animación salida
-    dinamico.style.opacity = "0";
-    dinamico.style.transform = "translateY(20px)";
+    dinamico.style.opacity   = "0";
+    dinamico.style.transform = "translateY(12px)";
 
     setTimeout(() => {
+      // Título y texto
       dinamico.querySelector("h3").textContent = card.dataset.title;
       dinamico.querySelector("p").textContent  = card.dataset.text;
 
-      dinamico.style.opacity = "1";
-      dinamico.style.transform = "translateY(0)";
-    }, 200);
+      // Badge — cambia color y texto según status
+      const badge = dinamico.querySelector(".status");
+      if (card.dataset.status === "soon") {
+        badge.textContent = "Próximamente";
+        badge.className   = "status status-soon";
+      } else {
+        badge.textContent = "En ejecución";
+        badge.className   = "status status-active";
+      }
 
+      // Barra de progreso
+      dinamico.querySelector(".progress-bar").style.width = card.dataset.progress + "%";
+
+      dinamico.style.opacity   = "1";
+      dinamico.style.transform = "translateY(0)";
+    }, 220);
   });
 });
 let ticking = false;
