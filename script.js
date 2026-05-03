@@ -248,7 +248,41 @@ document.querySelectorAll(".filtro-btn").forEach(btn => {
 });
 document.getElementById("buscador")?.addEventListener("input", filtrar);
 document.addEventListener("DOMContentLoaded", filtrar);
+// Perry — drag táctil para móvil
+perry.addEventListener("touchstart", (e) => {
+  isDragging = true;
+  perry.dataset.dragged  = "true";
+  perry.style.animation  = "none";
+  perry.style.transition = "none";
 
+  const touch = e.touches[0];
+  dragOffsetX = touch.clientX - perry.getBoundingClientRect().left;
+  dragOffsetY = touch.clientY - perry.getBoundingClientRect().top;
+
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+
+  const touch = e.touches[0];
+  const x = touch.clientX - dragOffsetX;
+  const y = touch.clientY - dragOffsetY;
+
+  perry.style.left   = x + "px";
+  perry.style.top    = y + "px";
+  perry.style.right  = "auto";
+  perry.style.bottom = "auto";
+
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener("touchend", () => {
+  if (!isDragging) return;
+  isDragging = false;
+  perry.style.transition = "transform 0.3s ease";
+  perry.style.transform  = "";
+});
 // --- Contacto ---
 function actualizarEstado() {
   const ahora = new Date();
