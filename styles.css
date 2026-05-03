@@ -194,9 +194,9 @@ nav a.active::after {
 .perry-peek {
   position: fixed;
   bottom: -100px;
-  right: -30px;
+  right: 300px;
   width: 750px;
-  z-index: 100;
+  z-index: -30px;
   opacity: 1;
   pointer-events: none;
   transition: opacity 0.5s ease;
