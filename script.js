@@ -73,27 +73,145 @@ function onScroll() {
   });
 
 // Perry — sombrero en inicio, completo y pequeño en el resto
+// Perry — comportamiento según sección
 if (perry) {
-  if (scrollY < 80) {
-    // Tope — solo sombrero, imagen grande
-    perry.style.opacity = "1";
-    perry.style.height  = "1200px";
-    perry.style.bottom  = "-660px";
-  } else {
-    // Scrolleando — Perry completo y pequeño, siempre visible
+  const inicioSection = document.getElementById("inicio");
+  const alturaInicio  = inicioSection ? inicioSection.offsetHeight : window.innerHeight;
+  const enInicio      = scrollY < alturaInicio;
+if (scrollY < 80) {
+  const esMobil = window.innerWidth <= 768;
+  perry.style.left          = "";
+  perry.style.top           = "";
+  perry.style.right         = esMobil ? "-20px"  : "50px";
+  perry.style.bottom        = esMobil ? "-280px" : "-660px";
+  perry.style.height        = esMobil ? "500px"  : "1170px";
+  perry.style.opacity       = "1";
+  perry.style.pointerEvents = "none";
+} else if (enInicio) {
+    // Scrolleando dentro del hero — se encoge
+    perry.style.left        = "";
+    perry.style.top         = "";
+    perry.style.right       = "50px";
+    perry.style.pointerEvents = "none"; // ← sin drag en inicio
     const progress  = Math.min((scrollY - 80) / 400, 1);
-    const newHeight = 1200 - (1200 - 280) * progress; // 1200px → 280px
-    const newBottom = -660 + (660 + 20) * progress;   // -660px → 20px
-    perry.style.opacity = "1";
+    const newHeight = 1200 - (900 * progress);
+    const newBottom = -660 + (680 * progress);
     perry.style.height  = newHeight + "px";
     perry.style.bottom  = newBottom + "px";
+    perry.style.opacity = "1";
+  } else {
+    // Fuera del hero — arrastrable
+    perry.style.pointerEvents = "auto"; // ← drag activado
+    perry.style.opacity = "1";
+      // Solo resetea posición si viene del hero (no si ya fue arrastrado)
   }
 }
 
   lastY   = scrollY;
   ticking = false;
 }
+// Perry — agitación ocasional en cualquier posición
+function agitarPerry() {
+  if (!perry) return;
 
+  perry.style.transition = "transform 0.1s ease";
+
+  const sacudidas = [
+    { x: -8, r: -5 },
+    { x: 8,  r: 5  },
+    { x: -6, r: -3 },
+    { x: 6,  r: 3  },
+    { x: 0,  r: 0  },
+  ];
+
+  sacudidas.forEach((s, i) => {
+    setTimeout(() => {
+      perry.style.transform = `translateX(${s.x}px) rotate(${s.r}deg)`;
+    }, i * 80);
+  });
+
+  setTimeout(() => {
+    perry.style.transform = "";
+    perry.style.transition = "height 0.4s ease, bottom 0.4s ease, opacity 0.5s ease";
+  }, sacudidas.length * 80 + 100);
+}
+
+function programarAgitacion() {
+  const delay = 4000 + Math.random() * 3000;
+  setTimeout(() => {
+    agitarPerry();
+    programarAgitacion();
+  }, delay);
+}
+
+programarAgitacion();
+
+// Perry — gira sobre su eje vertical siguiendo el cursor
+document.addEventListener("mousemove", (e) => {
+  if (!perry) return;
+
+  const rect   = perry.getBoundingClientRect();
+  const perryX = rect.left + rect.width / 2;
+  const perryY = rect.top  + rect.height / 2;
+
+  const dx = e.clientX - perryX;
+  const dy = e.clientY - perryY;
+
+  // Horizontal — gira izquierda/derecha
+  const rotY = Math.max(-25, Math.min(25, dx * 0.03));
+  // Vertical — se inclina arriba/abajo (invertido para que sea natural)
+  const rotX = Math.max(-15, Math.min(15, -dy * 0.03));
+
+  perry.style.transform = `perspective(800px) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+});
+document.addEventListener("mouseleave", () => {
+  if (!perry) return;
+  perry.style.transition = "transform 0.5s ease";
+  perry.style.transform  = "perspective(800px) rotateY(0deg)";
+});
+// Resetea al salir del área
+document.addEventListener("mouseleave", () => {
+  if (!perry) return;
+  perry.style.transform = "";
+});
+// Perry — arrastrable con click
+let isDragging = false;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+perry.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  perry.style.animation  = "none"; // pausa animaciones
+  perry.style.transition = "none";
+  perry.style.cursor     = "grabbing";
+
+  dragOffsetX = e.clientX - perry.getBoundingClientRect().left;
+  dragOffsetY = e.clientY - perry.getBoundingClientRect().top;
+
+  e.preventDefault();
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  const x = e.clientX - dragOffsetX;
+  const y = e.clientY - dragOffsetY;
+
+  perry.style.left   = x + "px";
+  perry.style.top    = y + "px";
+  perry.style.right  = "auto";
+  perry.style.bottom = "auto";
+});
+
+document.addEventListener("mouseup", () => {
+  if (!isDragging) return;
+  isDragging = false;
+  perry.style.cursor = "grab";
+
+  // Rebote suave al soltar
+  perry.style.transition = "transform 0.3s ease";
+  perry.style.transform  = "";
+});
 // --- Comunicados ---
 let filtroActivo = "todos";
 

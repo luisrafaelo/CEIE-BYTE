@@ -188,15 +188,16 @@ nav a.active::after {
   position: fixed;
   bottom: -660px;   /* ← ajusta para mostrar solo el sombrero */
   right: 50px;    /* ← ajusta posición horizontal */
-  height: 1200px;    /* ← controla el tamaño con height */
+  height: 1170px;    /* ← controla el tamaño con height */
   width: auto;      /* ← deja que el ancho se calcule solo */
   z-index: 100;
-  pointer-events: none;
+  cursor: grab;  
   transition: height 0.3s ease, bottom 0.3s ease, opacity 0.5s ease;
-  animation: perryPeek 1.2s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards,
-    perryBob 2.5s ease-in-out 2s infinite;
-}
 
+}
+.perry-peek:active {
+  cursor: grabbing;
+}
 .perry-peek img {
   height: 100%;
   width: auto;
@@ -1077,8 +1078,13 @@ footer {
   .recursos-grid    { grid-template-columns: 1fr 1fr; }
 
   /* Perry */
-  .perry-peek       { width: 220px; right: -15px; opacity: 0.7; }
-
+  .perry-peek {
+    height: 500px;    /* ← más pequeño */
+    bottom: -280px;   /* ← ajusta para que solo se vea el sombrero */
+    right: -20px;
+    pointer-events: none;
+    cursor: default;
+  }
   /* Footer */
   footer { font-size: 12px; padding: 15px; }
 }
@@ -1092,7 +1098,11 @@ footer {
   .logo               { font-size: 17px; }
   .logo img           { width: 28px; height: 28px; }
   .recursos-grid      { grid-template-columns: 1fr; }
-  .perry-peek         { display: none; }
+  .perry-peek {
+    height: 380px;
+    bottom: -210px;
+    right: -15px;
+  }
 }
 
 /* ── Modo horizontal en móvil ── */
@@ -1105,7 +1115,8 @@ footer {
     border-bottom: none;
     padding-bottom: 0; padding-right: 15px;
   }
-  .ham-btn { display: block !important;}
+  .ham-btn { display: block !important; }
   .byte-vertical span { font-size: 36px; }
   .hero h1            { font-size: 18px; }
+  .perry-peek         { display: none; } /* ← oculto en landscape */
 }
