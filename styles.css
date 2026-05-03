@@ -114,14 +114,7 @@ header.scrolled {
         opacity: 1;
     }
 }
-@keyframes perryPeek {
-  from { bottom: -2000px; }
-  to   { bottom: -100px; }
-}
-@keyframes perryBob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
+
 /*#endregion*/
 /*TODO: ========== 5. LOGO ---- */
 .logo {
@@ -193,26 +186,27 @@ nav a.active::after {
 /* ========== 7. PERRY PEEK (MASCOTA FLOTANTE) ---- */
 .perry-peek {
   position: fixed;
-  bottom: -100px;
-  right: 300px;
-  width: 750px;
-  z-index: -30px;
-  opacity: 1;
+  bottom: -660px;   /* ← ajusta para mostrar solo el sombrero */
+  right: 50px;    /* ← ajusta posición horizontal */
+  height: 1200px;    /* ← controla el tamaño con height */
+  width: auto;      /* ← deja que el ancho se calcule solo */
+  z-index: 100;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: height 0.3s ease, bottom 0.3s ease, opacity 0.5s ease;
   animation: perryPeek 1.2s cubic-bezier(0.34,1.56,0.64,1) 0.5s forwards,
     perryBob 2.5s ease-in-out 2s infinite;
 }
+
 .perry-peek img {
-  width: 100%;
+  height: 100%;
+  width: auto;
   display: block;
 }
-.perry-peek.hidden {
-  opacity: 0;
-  transform: scale(0.8) translateY(20px);
-  pointer-events: none;
-}
 
+@keyframes perryPeek {
+  from { bottom: -1200px; }
+  to   { bottom: -660px; }
+}
 /* ========== 8. HERO (PANTALLA DE INICIO) ---- */
 .hero {
   scroll-snap-align: start;
