@@ -186,9 +186,9 @@ nav a.active::after {
 /* ========== 7. PERRY PEEK (MASCOTA FLOTANTE) ---- */
 .perry-peek {
   position: fixed;
-  bottom: -660px;   /* ← ajusta para mostrar solo el sombrero */
-  right: 50px;    /* ← ajusta posición horizontal */
-  height: 1170px;    /* ← controla el tamaño con height */
+  bottom: -500px;   /* ← ajusta para mostrar solo el sombrero */
+  right: 250px;    /* ← ajusta posición horizontal */
+  height: 750px;    /* ← controla el tamaño con height */
   width: auto;      /* ← deja que el ancho se calcule solo */
   z-index: 100;
   cursor: grab;  
@@ -206,7 +206,7 @@ nav a.active::after {
 
 @keyframes perryPeek {
   from { bottom: -1200px; }
-  to   { bottom: -660px; }
+  to   { bottom: -500px; }
 }
 /* ========== 8. HERO (PANTALLA DE INICIO) ---- */
 .hero {
