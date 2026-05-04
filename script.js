@@ -270,7 +270,7 @@ function actualizarEstado() {
   const dot   = document.getElementById("estadoDot");
   const txt   = document.getElementById("estadoTxt");
   if (!dot || !txt) return;
-  const disponible = dia >= 1 && dia <= 5 && hora >= 8 && hora < 18;
+  const disponible = dia >= 1 && dia <= 6 && hora >= 8 && hora < 22;
   dot.style.background = disponible ? "#25d366" : "#ff4444";
   txt.textContent      = disponible
     ? "Disponibles ahora · Respondemos en minutos"
@@ -292,7 +292,29 @@ function enviar() {
   document.getElementById("formArea").style.display    = "none";
   document.getElementById("formSuccess").style.display = "block";
 }
+// --- Dropdown externos ---
+function toggleExterno() {
+  const dropdown = document.getElementById("externoDropdown");
+  const card     = document.getElementById("cardExterno");
+  const arrow    = document.getElementById("externoArrow");
+  const isOpen   = dropdown.classList.contains("open");
 
+  dropdown.classList.toggle("open");
+  card.classList.toggle("open");
+  arrow.textContent = isOpen ? "↗" : "✕";
+}
+// --- Dropdown WhatsApp ---
+function toggleWhatsapp() {
+  document.getElementById("whatsappDropdown").classList.toggle("open");
+}
+
+// Cierra al hacer click fuera
+document.addEventListener("click", (e) => {
+  const wrap = document.querySelector(".whatsapp-wrap");
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById("whatsappDropdown").classList.remove("open");
+  }
+});
 // --- Hamburguesa ---
 hamBtn.addEventListener('click', () => {
   mainNav.classList.toggle('open');
