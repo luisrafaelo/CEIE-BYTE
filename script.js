@@ -228,40 +228,6 @@ document.addEventListener("touchend", () => {
   perry.style.transform  = "";
 });
 
-// --- Comunicados ---
-let filtroActivo = "todos";
-
-function setFiltro(f) {
-  filtroActivo = f;
-  document.querySelectorAll(".filtro-btn").forEach(b => {
-    b.classList.toggle("on", b.dataset.f === f);
-  });
-  filtrar();
-}
-
-function filtrar() {
-  const q     = document.getElementById("buscador")?.value.toLowerCase() || "";
-  const cards = document.querySelectorAll(".com-card");
-  let visibles = 0;
-  cards.forEach(card => {
-    const tagOk   = filtroActivo === "todos" || card.dataset.tag === filtroActivo;
-    const textoOk = card.textContent.toLowerCase().includes(q);
-    const mostrar = tagOk && textoOk;
-    card.style.display = mostrar ? "" : "none";
-    if (mostrar) visibles++;
-  });
-  const contador = document.getElementById("contador");
-  if (contador) contador.textContent = `Mostrando ${visibles} de ${cards.length} comunicados`;
-  const empty = document.getElementById("empty");
-  if (empty) empty.style.display = visibles === 0 ? "block" : "none";
-}
-
-document.querySelectorAll(".filtro-btn").forEach(btn => {
-  btn.addEventListener("click", () => setFiltro(btn.dataset.f));
-});
-document.getElementById("buscador")?.addEventListener("input", filtrar);
-document.addEventListener("DOMContentLoaded", filtrar);
-
 // --- Contacto ---
 function actualizarEstado() {
   const ahora = new Date();
@@ -307,6 +273,31 @@ function toggleExterno() {
 function toggleWhatsapp() {
   document.getElementById("whatsappDropdown").classList.toggle("open");
 }
+
+document.querySelectorAll(".wa-item.has-sub").forEach(item => {
+  item.addEventListener("click", (e) => {
+    if (window.innerWidth > 768) return;
+    e.stopPropagation();
+
+    const yaEstabaAbierto = item.classList.contains("open");
+
+    // Cierra todos los demás
+    document.querySelectorAll(".wa-item.open").forEach(i => i.classList.remove("open"));
+
+    // Si no estaba abierto, ábrelo
+    if (!yaEstabaAbierto) {
+      item.classList.add("open");
+    }
+  });
+});
+
+document.addEventListener("click", (e) => {
+  const wrap = document.querySelector(".whatsapp-wrap");
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById("whatsappDropdown").classList.remove("open");
+    document.querySelectorAll(".wa-item.open").forEach(i => i.classList.remove("open"));
+  }
+});
 
 // Cierra al hacer click fuera
 document.addEventListener("click", (e) => {

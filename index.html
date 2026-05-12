@@ -98,70 +98,21 @@
 </section>
 
 <section id="proyectos" class="section proyectos">
-  <div class="proyectos-container">
+  <p class="sec-sub">Gestión estudiantil · CEIE-BYTE</p>
 
-    <!-- Cards lado a lado -->
-    <div class="proyectos-cards">
-
-      <!-- Card fija -->
-      <div class="proyecto-card fijo">
-        <h3>Aniversario de la Carrera</h3>
-        <span class="status status-active">En ejecución</span>
-        <p>Evento central de la gestión. Incluye seminarios técnicos,
-        actividades deportivas, integración estudiantil y feria tecnológica.</p>
-        <div class="progress">
-        <div class="progress-bar" style="width: 10%;"></div>
-        </div>
-        <button>Ver más</button>
-      </div>
-
-      <!-- Card dinámica -->
-      <div class="proyecto-card dinamico" id="proyecto-dinamico">
-        <h3>Seminarios Técnicos</h3>
-        <span class="status status-active">En ejecución</span>
-        <p>Ciclo de conferencias con docentes y profesionales invitados
-        enfocados en innovación electrónica y tecnología aplicada.</p>
-        <div class="progress">
-        <div class="progress-bar" style="width: 50%;"></div>
-        </div>
-        <button>Ver más</button>
-      </div>
-
-    </div>
-
-    <!-- Mini-cards ABAJO — solo este bloque, borra el otro -->
-    <div class="proyectos-tabs">
-    <div class="mini-card active"
-        data-title="Seminarios Técnicos"
-        data-text="Ciclo de conferencias con docentes y profesionales invitados enfocados en innovación electrónica y tecnología aplicada."
-        data-status="active"
-        data-progress="20">
-      Seminarios
-    </div>
-      <div class="mini-card"
-      data-title="Torneos Deportivos"
-      data-text="Competencias internas e interfacultativas para fortalecer integración y bienestar estudiantil."
-      data-status="active"
-      data-progress="40">
-      Deportes
-    </div>
-    <div class="mini-card"
-        data-title="Feria Tecnológica"
-        data-text="Exposición de proyectos electrónicos, automatización y desarrollo tecnológico estudiantil."
-        data-status="soon"
-        data-progress="0">
-      Tecnología
-    </div>
-    <div class="mini-card"
-        data-title="Cultura e Integración"
-        data-text="Actividades culturales, concursos y espacios de integración universitaria."
-        data-status="soon"
-        data-progress="0">
-      Cultura
-    </div>
-    </div>
-
+  <!-- Filtros -->
+  <div class="proy-filtros" id="proyFiltros">
+    <button class="proy-filtro on" data-f="todos">Todos</button>
+    <button class="proy-filtro" data-f="academico">Académico</button>
+    <button class="proy-filtro" data-f="cultural">Cultural</button>
+    <button class="proy-filtro" data-f="deportivo">Deportivo</button>
+    <button class="proy-filtro" data-f="tecnologico">Tecnológico</button>
+    <button class="proy-filtro" data-f="institucional">Institucional</button>
   </div>
+
+  <!-- Contenedor SPA -->
+  <div id="proyectosContainer"></div>
+
 </section>
 
 <section id="comunicados" class="section comunicados">
@@ -370,7 +321,9 @@
     <div class="perry-peek" id="perry">
     <img src="img/peripol.svg" alt="Perry">
 </div>
+<div id="modalOverlay"></div>
 <script src="script.js"></script>
-
+<script src="comunicados.js"></script>
+<script src="proyectos.js"></script>
 </body>
 </html>
