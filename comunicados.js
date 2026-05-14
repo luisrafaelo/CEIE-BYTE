@@ -1,5 +1,5 @@
 // ── COMUNICADOS DINÁMICOS ──────────────────────────────
-const API_URL = "https://script.google.com/macros/s/AKfycbzZjBccJ10MvcSXCPno4ubvB4pw3SHZOg2AifLTAfdQcJkfcrd_bkdMLQo0I7mAbQ-H/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwwEhneLgSWlMHPt54Xr3xuwRyiHUqi1WS5kmWWMrQ7qkvyzkNjOnZDQAzmgHKr9DKt/exec";
 
 const estado = {
   todos:        [],

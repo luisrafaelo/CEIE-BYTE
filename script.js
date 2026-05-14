@@ -142,6 +142,9 @@ function agitarPerry() {
     perry.style.transform  = "";
     perry.style.transition = "height 0.4s ease, bottom 0.4s ease, opacity 0.5s ease";
   }, sacudidas.length * 80 + 100);
+
+  // Mostrar burbuja al agitarse
+  setTimeout(mostrarBurbuja, 300);
 }
 
 function programarAgitacion() {

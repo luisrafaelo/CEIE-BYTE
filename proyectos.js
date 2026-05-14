@@ -1,5 +1,5 @@
 // ── PROYECTOS SPA ──────────────────────────────────────
-const PROY_API = "https://script.google.com/macros/s/AKfycbzZjBccJ10MvcSXCPno4ubvB4pw3SHZOg2AifLTAfdQcJkfcrd_bkdMLQo0I7mAbQ-H/exec";
+const PROY_API = "https://script.google.com/macros/s/AKfycbwwEhneLgSWlMHPt54Xr3xuwRyiHUqi1WS5kmWWMrQ7qkvyzkNjOnZDQAzmgHKr9DKt/exec";
 
 const proyState = {
   todos:        [],
@@ -103,28 +103,36 @@ async function viewProject(id) {
   proyState.vista = "detalle";
   document.getElementById("proyFiltros").style.display = "none";
 
+  // Buscar primero en los datos que ya tenemos
+  const local = proyState.todos.find(p => p.id.toString() === id.toString());
+  if (local) {
+    renderDetalle(local);
+    return;
+  }
+
+  // Solo si no está en memoria, hacer fetch
   container().innerHTML = `
     <div style="text-align:center;padding:60px;">
       <div class="proy-spinner"></div>
     </div>`;
 
   try {
-    const res  = await fetch(`${PROY_API}?hoja=proyectos&id=${id}`);
+    const res  = await fetch(`${PROY_API}?hoja=proyectos&id=${id}`, {
+      redirect: "follow"
+    });
     const json = await res.json();
     if (!json.ok) throw new Error(json.error);
-
     renderDetalle(json.data);
 
   } catch (err) {
     console.error("Proyecto detalle:", err);
     container().innerHTML = `
-      <button class="proy-volver" onclick="goBack()">← Volver</button>
       <p style="text-align:center;color:rgba(255,255,255,0.4);padding:40px;">
         No se pudo cargar el proyecto.
-      </p>`;
+      </p>
+      <button class="proy-volver" onclick="goBack()">← Volver al listado</button>`;
   }
 }
-
 function renderDetalle(p) {
   const estadoInfo = {
     ACTIVO:       { label: "Activo",       clase: "estado-activo" },
@@ -138,7 +146,6 @@ function renderDetalle(p) {
 
   container().innerHTML = `
     <div class="proy-detalle fade-in">
-      <button class="proy-volver" onclick="goBack()">← Volver</button>
       ${imgHTML}
       <div class="proy-detalle-body">
         <div class="proy-card-top" style="margin-bottom:12px;">
@@ -157,6 +164,7 @@ function renderDetalle(p) {
           ${p.descripcionLarga.replace(/\n/g, "<br>")}
         </div>
       </div>
+      <button class="proy-volver" onclick="goBack()">← Volver al listado</button>
     </div>`;
 }
 

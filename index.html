@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>CEIE - BYTE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=Poiret+One&family=Cinzel:wght@400;700;900&family=Cormorant:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script>
-  if (history.scrollRestoration) {
-    history.scrollRestoration = "manual";
-  }
-</script>
+  <meta charset="UTF-8">
+  <title>CEIE - BYTE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/ESCUDO_BYTE.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/alerta.png">
+
+  <!-- SEO -->
+  <meta name="description" content="CEIE-BYTE — Centro de Estudiantes de Ingeniería Electrónica. Representamos, articulamos y transformamos la experiencia universitaria.">
+  <meta name="theme-color" content="#00bfa6">
+
+  <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+  <meta property="og:title" content="CEIE - BYTE">
+  <meta property="og:description" content="Centro de Estudiantes de Ingeniería Electrónica — Base y Transformación Estudiantil.">
+  <meta property="og:image" content="https://luisrafaelo.github.io/CEIE-BYTE/img/alerta.png">
+  <meta property="og:url" content="https://luisrafaelo.github.io/CEIE-BYTE/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CEIE - BYTE">
+  <meta name="twitter:description" content="Centro de Estudiantes de Ingeniería Electrónica — Base y Transformación Estudiantil.">
+  <meta name="twitter:image" content="https://luisrafaelo.github.io/CEIE-BYTE/img/alerta.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;500;600;700&family=Poiret+One&family=Cinzel:wght@400;700;900&family=Cormorant:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    if (history.scrollRestoration) {
+      history.scrollRestoration = "manual";
+    }
+  </script>
 </head>
 
 <body>
@@ -34,6 +57,13 @@
     <a href="#recursos">Recursos</a>
   </nav>
 </header>
+
+<div id="avisoBar" class="aviso-bar" style="display:none;">
+  <span class="aviso-icon">⚡</span>
+  <span class="aviso-mensaje" id="avisoMensaje"></span>
+  <a class="aviso-link" id="avisoLink" href="#" target="_blank" rel="noopener">Ver más →</a>
+  <button class="aviso-close" onclick="cerrarAviso()">✕</button>
+</div>
 
 <section id="inicio" class="hero">
   <div class="hero-layout">
@@ -134,23 +164,7 @@
   </div>
 
   <div class="contador" id="contador"></div>
-  <div class="cards-lista" id="lista">
-
-    <!-- Card fijada (siempre arriba) -->
-    <div class="com-card fijada" data-tag="eventos">
-      <div class="card-top">
-        <span class="pin-icon">📌</span>
-        <span class="tag-badge tag-eventos">Eventos</span>
-        <span class="badge-nuevo">Nuevo</span>
-        <span class="card-fecha">28 abr 2026</span>
-      </div>
-      <div class="card-title">Aniversario — Programa Oficial</div>
-      <div class="card-preview">Cronograma completo...</div>
-      <div class="card-footer">
-        <a class="pdf-btn" href="docs/aniversario.pdf" download>📄 Descargar PDF</a>
-        <span class="ver-mas">Ver más →</span>
-      </div>
-    </div>
+  <div class="cards-lista" id="lista"></div>
 
     <!-- Más cards con data-tag="academico|administrativo|eventos|convocatorias" -->
 
@@ -178,29 +192,29 @@
 
   <div class="whatsapp-dropdown" id="whatsappDropdown">
 
-    <div class="wa-item has-sub">
-      <span>Secretaría Ejecutiva <span class="wa-arrow">›</span></span>
-      <div class="wa-submenu">
-        <a href="https://wa.me/591NUMERO1?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Secretario/a 1</a>
-        <a href="https://wa.me/591NUMERO2?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Secretario/a 2</a>
-      </div>
-    </div>
+<div class="wa-item has-sub">
+  <span>Secretaría Ejecutiva <span class="wa-arrow">›</span></span>
+  <div class="wa-submenu">
+    <a href="https://wa.me/59173075865?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Hasan</a>
+    <a href="https://wa.me/59163269231?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Alejandro</a>
+  </div>
+</div>
 
-    <div class="wa-item has-sub">
-      <span>Consejo Facultativo <span class="wa-arrow">›</span></span>
-      <div class="wa-submenu">
-        <a href="https://wa.me/591NUMERO3?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Consejero/a 1</a>
-        <a href="https://wa.me/591NUMERO4?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Consejero/a 2</a>
-      </div>
-    </div>
+<div class="wa-item has-sub">
+  <span>Consejo Facultativo <span class="wa-arrow">›</span></span>
+  <div class="wa-submenu">
+    <a href="https://wa.me/59173723058?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Carla</a>
+    <a href="https://wa.me/59179521088?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Rafael</a>
+  </div>
+</div>
 
-    <div class="wa-item has-sub">
-      <span>Consejo de Carrera <span class="wa-arrow">›</span></span>
-      <div class="wa-submenu">
-        <a href="https://wa.me/591NUMERO5?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Consejero/a 1</a>
-        <a href="https://wa.me/591NUMERO6?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Consejero/a 2</a>
-      </div>
-    </div>
+<div class="wa-item has-sub">
+  <span>Consejo de Carrera <span class="wa-arrow">›</span></span>
+  <div class="wa-submenu">
+    <a href="https://wa.me/59174046149?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Mariela</a>
+    <a href="https://wa.me/59169810652?text=Hola CEIE-BYTE!" target="_blank" rel="noopener noreferrer">Itamar</a>
+  </div>
+</div>
 
   </div>
 </div>
@@ -318,12 +332,15 @@
     <p>© 2026 CEIE - BYTE</p>
 </footer>
 
-    <div class="perry-peek" id="perry">
-    <img src="img/peripol.svg" alt="Perry">
-</div>
-<div id="modalOverlay"></div>
-<script src="script.js"></script>
-<script src="comunicados.js"></script>
-<script src="proyectos.js"></script>
+<div class="perry-peek" id="perry">
+      <img src="img/peripol.svg" alt="Perry">
+    </div>
+    <div id="perryBurbuja" class="perry-burbuja"></div>
+    <div id="modalOverlay"></div>
+
+    <script src="script.js"></script>
+    <script src="comunicados.js"></script>
+    <script src="proyectos.js"></script>
+    <script src="perry.js"></script>
 </body>
 </html>
