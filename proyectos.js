@@ -1,5 +1,5 @@
 // ── PROYECTOS SPA ──────────────────────────────────────
-const PROY_API = "https://script.google.com/macros/s/AKfycbwwEhneLgSWlMHPt54Xr3xuwRyiHUqi1WS5kmWWMrQ7qkvyzkNjOnZDQAzmgHKr9DKt/exec";
+const PROY_API = "https://script.google.com/macros/s/AKfycbyvK-3hfFIe1fCwOq7H0dAjguzZl7HGcyL9okbj1G2rBwBLU8R0n2HE14NSroKz1zi6/exec";
 
 const proyState = {
   todos:        [],
@@ -61,6 +61,8 @@ function renderGrid() {
       card.classList.add("fade-in");
     });
   });
+  // Activar drag en imágenes
+setTimeout(activarDragImagen, 500);
 }
 
 function cardProyHTML(p) {
@@ -140,13 +142,32 @@ function renderDetalle(p) {
     FINALIZADO:   { label: "Finalizado",   clase: "estado-finalizado" }
   }[p.estado] || { label: p.estado, clase: "" };
 
-  const imgHTML = p.imagen
-    ? `<div class="proy-detalle-img" style="background-image:url('${p.imagen}')"></div>`
-    : "";
+  // Carrusel si hay imágenes, si no usa la imagen principal
+  const todasImagenes = p.imagenes && p.imagenes.length > 0
+    ? p.imagenes
+    : (p.imagen ? [p.imagen] : []);
+
+  const carruselHTML = todasImagenes.length > 0 ? `
+    <div class="carrusel" id="carrusel">
+      <div class="carrusel-track" id="carruselTrack">
+        ${todasImagenes.map((img, i) => `
+          <div class="carrusel-slide" style="background-image:url('${img}')"></div>
+        `).join("")}
+      </div>
+      ${todasImagenes.length > 1 ? `
+        <button class="carrusel-btn carrusel-prev" onclick="moverCarrusel(-1)">‹</button>
+        <button class="carrusel-btn carrusel-next" onclick="moverCarrusel(1)">›</button>
+        <div class="carrusel-dots">
+          ${todasImagenes.map((_, i) => `
+            <div class="carrusel-dot ${i === 0 ? 'active' : ''}" onclick="irASlide(${i})"></div>
+          `).join("")}
+        </div>
+      ` : ""}
+    </div>` : "";
 
   container().innerHTML = `
     <div class="proy-detalle fade-in">
-      ${imgHTML}
+      ${carruselHTML}
       <div class="proy-detalle-body">
         <div class="proy-card-top" style="margin-bottom:12px;">
           <span class="proy-badge ${estadoInfo.clase}">${estadoInfo.label}</span>
@@ -166,6 +187,40 @@ function renderDetalle(p) {
       </div>
       <button class="proy-volver" onclick="goBack()">← Volver al listado</button>
     </div>`;
+
+  // Iniciar carrusel
+  if (todasImagenes.length > 1) iniciarCarrusel(todasImagenes.length);
+}
+
+// ── CARRUSEL ───────────────────────────────────────────
+let carruselIndex  = 0;
+let carruselTotal  = 0;
+let carruselTimer  = null;
+
+function iniciarCarrusel(total) {
+  carruselIndex = 0;
+  carruselTotal = total;
+  if (carruselTimer) clearInterval(carruselTimer);
+  carruselTimer = setInterval(() => moverCarrusel(1), 3000);
+}
+
+function moverCarrusel(dir) {
+  carruselIndex = (carruselIndex + dir + carruselTotal) % carruselTotal;
+  actualizarCarrusel();
+}
+
+function irASlide(i) {
+  carruselIndex = i;
+  actualizarCarrusel();
+  if (carruselTimer) clearInterval(carruselTimer);
+  carruselTimer = setInterval(() => moverCarrusel(1), 3000);
+}
+
+function actualizarCarrusel() {
+  const track = document.getElementById("carruselTrack");
+  const dots  = document.querySelectorAll(".carrusel-dot");
+  if (track) track.style.transform = `translateX(-${carruselIndex * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle("active", i === carruselIndex));
 }
 
 // ── VOLVER ─────────────────────────────────────────────
@@ -205,3 +260,33 @@ function mostrarSkeletonProy() {
 // ── INIT ───────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", loadProjects);
+// ── IMAGEN DRAG EN MÓVIL ──────────────────────────────
+function activarDragImagen() {
+  document.querySelectorAll(".proy-img").forEach(img => {
+    let startY     = 0;
+    let startPos   = 50; // porcentaje inicial
+    let currentPos = 50;
+    let dragging   = false;
+
+    img.addEventListener("touchstart", (e) => {
+      dragging = true;
+      startY   = e.touches[0].clientY;
+      const pos = img.style.backgroundPosition || "center 50%";
+      const match = pos.match(/(\d+)%/g);
+      startPos = match ? parseInt(match[match.length - 1]) : 50;
+      e.stopPropagation();
+    }, { passive: true });
+
+    img.addEventListener("touchmove", (e) => {
+      if (!dragging) return;
+      const deltaY = e.touches[0].clientY - startY;
+      currentPos   = Math.max(0, Math.min(100, startPos - deltaY * 0.3));
+      img.style.backgroundPosition = `center ${currentPos}%`;
+      e.stopPropagation();
+    }, { passive: true });
+
+    img.addEventListener("touchend", () => {
+      dragging = false;
+    });
+  });
+}

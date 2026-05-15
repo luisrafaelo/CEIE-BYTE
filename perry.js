@@ -1,5 +1,5 @@
 // ── PERRY BURBUJA ──────────────────────────────────────
-const PERRY_API = "https://script.google.com/macros/s/AKfycbwwEhneLgSWlMHPt54Xr3xuwRyiHUqi1WS5kmWWMrQ7qkvyzkNjOnZDQAzmgHKr9DKt/exec";
+const PERRY_API = "https://script.google.com/macros/s/AKfycbyvK-3hfFIe1fCwOq7H0dAjguzZl7HGcyL9okbj1G2rBwBLU8R0n2HE14NSroKz1zi6/exec";
 
 let perryData = null;
 
