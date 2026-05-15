@@ -42,49 +42,66 @@ function mostrarBurbuja() {
 }
 
 document.addEventListener("DOMContentLoaded", cargarPerry);
-
 function mostrarAviso(data) {
   const bar     = document.getElementById("avisoBar");
   const mensaje = document.getElementById("avisoMensaje");
   const link    = document.getElementById("avisoLink");
   if (!bar || !mensaje) return;
 
-  // No mostrar si el usuario ya lo cerró en esta sesión
-  if (sessionStorage.getItem("avisoCerrado")) return;
-
   mensaje.textContent = data.mensaje;
 
   if (data.link) {
-    link.href  = data.link;
+    link.href          = data.link;
     link.style.display = "inline";
   } else {
     link.style.display = "none";
   }
 
+  // Mostrar completo
   bar.style.display = "flex";
+  bar.classList.remove("minimized");
+
+  // Minimizar después de 2 segundos
+  setTimeout(() => {
+    bar.classList.add("minimized");
+  }, 2000);
 }
 
 function cerrarAviso() {
   const bar = document.getElementById("avisoBar");
   if (bar) bar.style.display = "none";
-  sessionStorage.setItem("avisoCerrado", "true");
 }
-window.addEventListener("scroll", () => {
-  const bar = document.getElementById("avisoBar");
-  if (!bar || bar.style.display === "none") return;
 
-  if (window.scrollY > 100) {
-    bar.classList.add("minimized");
+// Scroll: desaparece fuera de inicio, reaparece y minimiza al volver
+const inicioObs = new IntersectionObserver((entries) => {
+  const bar = document.getElementById("avisoBar");
+  if (!bar || !perryData) return;
+
+  if (entries[0].isIntersecting) {
+    bar.style.display = "flex";
+    bar.classList.remove("minimized");
+    setTimeout(() => {
+      bar.classList.add("minimized");
+    }, 2000);
   } else {
+    bar.style.display = "none";
     bar.classList.remove("minimized");
   }
+}, { threshold: 0.5 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const inicioSection = document.getElementById("inicio");
+  if (inicioSection) inicioObs.observe(inicioSection);
 });
 
-// Al hacer clic en el ícono minimizado, expande de nuevo
+// Clic en ícono minimizado expande
 document.addEventListener("click", (e) => {
   const bar = document.getElementById("avisoBar");
   if (!bar) return;
   if (bar.classList.contains("minimized") && e.target.classList.contains("aviso-icon")) {
     bar.classList.remove("minimized");
+    setTimeout(() => {
+      bar.classList.add("minimized");
+    }, 2000);
   }
 });

@@ -144,7 +144,11 @@ function agitarPerry() {
   }, sacudidas.length * 80 + 100);
 
   // Mostrar burbuja al agitarse
+const inicioSection = document.getElementById("inicio");
+const alturaInicio  = inicioSection ? inicioSection.offsetHeight : window.innerHeight;
+if (window.scrollY >= alturaInicio) {
   setTimeout(mostrarBurbuja, 300);
+}
 }
 
 function programarAgitacion() {
